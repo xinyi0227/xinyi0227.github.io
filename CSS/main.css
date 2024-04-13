@@ -22,6 +22,54 @@ p {
     margin: 5px 0;
 }
 
+.tabs {
+    width: 800px;
+    margin: auto;
+    margin-top: 10px;
+    padding: 10px;
+    background-color: burlywood;
+}
+
+.tab-content {
+    display: none;
+}
+
+/* Style for tab buttons */
+.tab-button {
+    background-color: #f4f4f4;
+    color: #333;
+    border: none;
+    padding: 10px 20px;
+    margin-right: 10px;
+    cursor: pointer;
+    border-radius: 5px 5px 0 0;
+}
+
+.tab-button:hover {
+    background-color: #ddd;
+}
+
+.tab-button.active {
+    background-color: #ccc;
+}
+
+/* Style for tab content */
+.tab-content {
+    display: none;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-top: none;
+    border-radius: 0 0 5px 5px;
+}
+
+/* Show active tab content */
+.tab-content.active {
+    display: block;
+}
+
+
+
 .weather-icon {
     width: 100px;
     height: 100px; 

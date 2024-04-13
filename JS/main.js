@@ -1,3 +1,27 @@
+// Get all tab buttons
+const tabButtons = document.querySelectorAll('.tab-button');
+
+// Get all tab contents
+const tabContents = document.querySelectorAll('.tab-content');
+
+// Add click event listener to each tab button
+tabButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        // Get the target section based on data-target attribute
+        const targetId = button.dataset.target;
+        const targetSection = document.getElementById(targetId);
+
+        // Hide all tab contents
+        tabContents.forEach(content => {
+            content.style.display = 'none';
+        });
+
+        // Show the target tab content
+        targetSection.style.display = 'block';
+    });
+});
+
+
 // Add event listener to the form for form submission
 const locationForm = document.getElementById('location-form');
 locationForm.addEventListener('submit', handleFormSubmit);

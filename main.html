@@ -21,37 +21,38 @@
         <button type="submit">Get Weather</button>
     </form>
 
-    <div id="weather">
-        <!-- Current Weather Section -->
-        <div class="section" id="current-weather-section">
-            <h2>Current Weather</h2>
-            <div id="current-weather-info"></div>
-        </div>
-
-        <!-- Sunrise and Sunset Section -->
-        <div class="section" id="sunrise-sunset-section">
-            <h2>Sunrise and Sunset</h2>
-            <div id="sunrise-sunset-info"></div>
-        </div>
-
-        <!-- Additional Weather Details Section -->
-        <div class="section" id="additional-details-section">
-            <h2>Additional Weather Details</h2>
-            <div id="additional-details-info"></div>
-        </div>
-
-        <!-- Hourly Forecast Section -->
-        <div class="section" id="hourly-forecast-section">
-            <h2>Hourly Forecast</h2>
-            <div id="hourly-forecast-info"></div>
-        </div>
-
-        <!-- Daily Forecast Section -->
-        <div class="section" id="daily-forecast-section">
-            <h2>Daily Forecast</h2>
-            <div id="daily-forecast-info"></div>
-        </div>
-    </div>  
+    <div class="tabs">
+        <button class="tab-button" data-target="current-weather-section">Current Weather</button>
+        <button class="tab-button" data-target="sunrise-sunset-section">Sunrise and Sunset</button>
+        <button class="tab-button" data-target="additional-details-section">Additional Details</button>
+        <button class="tab-button" data-target="hourly-forecast-section">Hourly Forecast</button>
+        <button class="tab-button" data-target="daily-forecast-section">Daily Forecast</button>
+    </div>
+    
+    <div class="tab-content" id="current-weather-section">
+        <h2>Current Weather</h2>
+        <div id="current-weather-info"></div>
+    </div>
+    
+    <div class="tab-content" id="sunrise-sunset-section">
+        <h2>Sunrise and Sunset</h2>
+        <div id="sunrise-sunset-info"></div>
+    </div>
+    
+    <div class="tab-content" id="additional-details-section">
+        <h2>Additional Weather Details</h2>
+        <div id="additional-details-info"></div>
+    </div>
+    
+    <div class="tab-content" id="hourly-forecast-section">
+        <h2>Hourly Forecast</h2>
+        <div id="hourly-forecast-info"></div>
+    </div>
+    
+    <div class="tab-content" id="daily-forecast-section">
+        <h2>Daily Forecast</h2>
+        <div id="daily-forecast-info"></div>
+    </div>
 
     <script src="JS/main.js"></script>
 
