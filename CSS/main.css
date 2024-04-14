@@ -27,7 +27,7 @@ p {
     margin: auto;
     margin-top: 10px;
     padding: 10px;
-    background-color: burlywood;
+    background-color: rgb(179, 173, 164);
 }
 
 .tab-content {
@@ -61,6 +61,8 @@ p {
     border: 1px solid #ddd;
     border-top: none;
     border-radius: 0 0 5px 5px;
+    width: 780px;
+    margin: auto;
 }
 
 /* Show active tab content */
@@ -70,7 +72,69 @@ p {
 
 
 
+
+
+
+.weather-container {
+    display: flex;
+    justify-content: center; /* Horizontally center the content */
+}
+
+.weather-info {
+    display: flex;
+    align-items: center;
+    border: none;
+    padding: 20px; /* Optional: Add padding for spacing */
+}
+
+.weather-info p {
+    margin-bottom: 10px; /* Adjust the margin as needed */
+    text-align: left;
+}
+
 .weather-icon {
+    margin-left: 50px; 
     width: 100px;
     height: 100px; 
 }
+
+
+
+
+.hourly-tab {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.hourly-tab button {
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    padding: 10px 20px;
+    margin: 0 5px;
+    cursor: pointer;
+}
+
+.hourly-tab button.active {
+    background-color: #ccc;
+}
+
+.hourly-details {
+    display: none;
+    margin-top: 20px;
+}
+
+.hourly-details.active {
+    display: block;
+}
+
+.hourly-forecast-item {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+}
+
+.hourly-forecast-item p {
+    margin: 5px 0;
+}
+

@@ -62,10 +62,16 @@ async function getWeather(lat, lon) {
         // Current Weather Section
         const currentWeatherSection = document.getElementById('current-weather-info');
         currentWeatherSection.innerHTML = `
-            <p>Temperature: ${data.current.temp} K</p>
-            <p>Humidity: ${data.current.humidity}%</p>
-            <p>Weather: ${data.current.weather[0].description}</p>
-            <img src="http://openweathermap.org/img/w/${data.current.weather[0].icon}.png" alt="Weather Icon" class="weather-icon">
+        <div class="weather-container">
+            <div id="current-weather-info" class="weather-info">
+                <div>
+                    <p>Temperature: ${data.current.temp} K</p>
+                    <p>Humidity: ${data.current.humidity}%</p>
+                    <p>Weather: ${data.current.weather[0].description}</p>
+                </div>
+                <img src="http://openweathermap.org/img/w/${data.current.weather[0].icon}.png" alt="Weather Icon" class="weather-icon">
+            </div>
+        </div>
         `;
 
         // Sunrise and Sunset Section
@@ -86,19 +92,60 @@ async function getWeather(lat, lon) {
         `;
 
         // Hourly Forecast Section
-        const hourlyForecastSection = document.getElementById('hourly-forecast-info');
-        hourlyForecastSection.innerHTML = '';
-        data.hourly.forEach(hour => {
-            const hourTime = new Date(hour.dt * 1000).toLocaleTimeString();
-            hourlyForecastSection.innerHTML += `
-                <div>
-                    <p>Time: ${hourTime}</p>
-                    <p>Temperature: ${hour.temp} K</p>
-                    <p>Weather: ${hour.weather[0].description}</p>
-                    <img src="http://openweathermap.org/img/w/${hour.weather[0].icon}.png" alt="Weather Icon" class="weather-icon">
-                </div>
-            `;
+        const hourlyForecastSection = document.getElementById('hourly-tab'); // Changed to 'hourly-tab'
+        hourlyForecastSection.innerHTML = ''; // Clear previous content
+
+        // Create tabs for the next 24 hours
+        const now = new Date();
+        for (let i = 0; i < 24; i++) {
+            const hour = new Date(now.getTime() + i * 3600 * 1000);
+            const hourTime = hour.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+            const button = document.createElement('button');
+            button.textContent = hourTime;
+            hourlyForecastSection.appendChild(button);
+        }
+
+        // Event listener for hourly tabs using event delegation
+        hourlyForecastSection.addEventListener('click', function(event) {
+            if (event.target.tagName === 'BUTTON') {
+                const index = Array.from(this.children).indexOf(event.target);
+                const selectedHour = new Date(Date.now() + index * 3600 * 1000);
+                showHourlyDetails(selectedHour, data.hourly);
+            }
         });
+
+        // Function to show hourly details for the selected hour
+        function showHourlyDetails(hour, hourlyData) {
+            const selectedHour = hour.getHours();
+
+            // Find the data corresponding to the selected hour
+            const hourDetails = hourlyData.find(data => {
+                const dataHour = new Date(data.dt * 1000).getHours();
+                return dataHour === selectedHour;
+            });
+
+            if (hourDetails) {
+                const hourlyDetailsContainer = document.getElementById('hourly-details');
+                hourlyDetailsContainer.innerHTML = '';
+
+                // Show details for the selected hour
+                const hourTime = new Date(hourDetails.dt * 1000).toLocaleTimeString();
+                const div = document.createElement('div');
+                div.classList.add('hourly-forecast-item');
+                div.innerHTML = `
+                    <p>Time: ${hourTime}</p>
+                    <p>Temperature: ${hourDetails.temp} K</p>
+                    <p>Weather: ${hourDetails.weather[0].description}</p>
+                    <img src="http://openweathermap.org/img/w/${hourDetails.weather[0].icon}.png" alt="Weather Icon" class="weather-icon">
+                `;
+                hourlyDetailsContainer.appendChild(div);
+            } else {
+                console.log('No weather information available for the selected hour.');
+            }
+        }
+
+
 
         // Daily Forecast Section
         const dailyForecastSection = document.getElementById('daily-forecast-info');
@@ -118,3 +165,4 @@ async function getWeather(lat, lon) {
         console.log('Error fetching weather data:', error);
     }
 }
+
