@@ -47,6 +47,8 @@ async function handleFormSubmit(event) {
     }
 }
 
+
+
 // Function to fetch weather data from the API
 async function getWeather(lat, lon) {
     const API_KEY = '4434eafdf444c726a6c19b494ca335f8'; 
@@ -92,7 +94,7 @@ async function getWeather(lat, lon) {
         `;
 
         // Hourly Forecast Section
-        const hourlyForecastSection = document.getElementById('hourly-tab'); // Changed to 'hourly-tab'
+        const hourlyForecastSection = document.getElementById('hourly-tab'); // Selecting the correct container
         hourlyForecastSection.innerHTML = ''; // Clear previous content
 
         // Create tabs for the next 24 hours
@@ -106,14 +108,18 @@ async function getWeather(lat, lon) {
             hourlyForecastSection.appendChild(button);
         }
 
+        // Get the hourly tab container by ID
+        const hourlyTabContainer = document.getElementById('hourly-tab');
+
         // Event listener for hourly tabs using event delegation
-        hourlyForecastSection.addEventListener('click', function(event) {
+        hourlyTabContainer.addEventListener('click', function(event) {
             if (event.target.tagName === 'BUTTON') {
-                const index = Array.from(this.children).indexOf(event.target);
+                const index = Array.from(tabButtons).indexOf(event.target);
                 const selectedHour = new Date(Date.now() + index * 3600 * 1000);
                 showHourlyDetails(selectedHour, data.hourly);
             }
         });
+
 
         // Function to show hourly details for the selected hour
         function showHourlyDetails(hour, hourlyData) {
@@ -126,7 +132,7 @@ async function getWeather(lat, lon) {
             });
 
             if (hourDetails) {
-                const hourlyDetailsContainer = document.getElementById('hourly-details');
+                const hourlyDetailsContainer = document.getElementById('hourly-details'); // Selecting the correct container
                 hourlyDetailsContainer.innerHTML = '';
 
                 // Show details for the selected hour
@@ -144,6 +150,8 @@ async function getWeather(lat, lon) {
                 console.log('No weather information available for the selected hour.');
             }
         }
+
+
 
 
 
