@@ -95,11 +95,8 @@ async function getWeather(lat, lon) {
 
 
 
-        // Hourly Forecast Section
         // Get the hourly tab container by ID
         const hourlyTabContainer = document.getElementById('hourly-tab');
-        // Get the hourly details container by ID
-        const hourlyDetailsContainer = document.getElementById('hourly-details-container');
 
         // Create tabs for the next 24 hours
         const now = new Date();
@@ -109,48 +106,62 @@ async function getWeather(lat, lon) {
 
             const button = document.createElement('button');
             button.textContent = hourTime;
-            button.dataset.index = i; // Assign a unique data-index attribute
+            button.dataset.hourIndex = i; // Add a custom data attribute to store the hour index
             hourlyTabContainer.appendChild(button);
+
+            const detailsContainer = document.createElement('div');
+            detailsContainer.classList.add('hourly-details');
+            detailsContainer.id = 'hourly-details-' + i;
+            hourlyTabContainer.appendChild(detailsContainer);
         }
 
-        // Event listener for hourly tabs
+        // Event listener for hourly tabs using event delegation
         hourlyTabContainer.addEventListener('click', function(event) {
             if (event.target.tagName === 'BUTTON') {
-                const index = event.target.dataset.index;
-                const selectedHour = new Date(now.getTime() + index * 3600 * 1000);
-                // Assuming `data` is defined elsewhere, you should replace it with your actual data source.
-                showHourlyDetails(selectedHour, data.hourly);
+                // Remove 'active' class from all buttons
+                document.querySelectorAll('.hourly-tab button').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+
+                // Add 'active' class to the clicked button
+                event.target.classList.add('active');
+
+                // Get the hour index from the custom data attribute
+                const hourIndex = event.target.dataset.hourIndex;
+                const selectedHour = new Date(now.getTime() + hourIndex * 3600 * 1000);
+                showHourlyDetails(selectedHour, data.hourly[hourIndex]);
+                
+                // Show the hourly-details-container
+                document.getElementById('hourly-details-container').style.display = 'block';
             }
         });
+
 
         // Function to show hourly details for the selected hour
         function showHourlyDetails(hour, hourlyData) {
             const selectedHour = hour.getHours();
-
-            // Find the data corresponding to the selected hour
-            const hourDetails = hourlyData.find(data => {
-                const dataHour = new Date(data.dt * 1000).getHours();
-                return dataHour === selectedHour;
-            });
-
-            if (hourDetails) {
-                hourlyDetailsContainer.innerHTML = '';
-
-                // Show details for the selected hour
-                const hourTime = new Date(hourDetails.dt * 1000).toLocaleTimeString();
-                const div = document.createElement('div');
-                div.classList.add('hourly-forecast-item');
-                div.innerHTML = `
-                    <p>Time: ${hourTime}</p>
-                    <p>Temperature: ${hourDetails.temp} K</p>
-                    <p>Weather: ${hourDetails.weather[0].description}</p>
-                    <img src="http://openweathermap.org/img/w/${hourDetails.weather[0].icon}.png" alt="Weather Icon" class="weather-icon">
-                `;
-                hourlyDetailsContainer.appendChild(div);
-            } else {
-                console.log('No weather information available for the selected hour.');
-            }
+        
+            const hourlyDetailsContainer = document.getElementById('hourly-details-container');
+            hourlyDetailsContainer.innerHTML = ''; // Clear previous content
+        
+            // Show details for the selected hour
+            const hourTime = hour.toLocaleTimeString();
+            const temperature = hourlyData.temp;
+            const weatherDescription = hourlyData.weather[0].description;
+        
+            const div = document.createElement('div');
+            div.classList.add('hourly-forecast-item');
+            div.innerHTML = `
+                <p>Time: ${hourTime}</p>
+                <p>Temperature: ${temperature} K</p>
+                <p>Weather: ${weatherDescription}</p>
+            `;
+            hourlyDetailsContainer.appendChild(div);
         }
+        
+
+
+
 
 
 

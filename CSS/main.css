@@ -25,7 +25,7 @@ p {
 .tabs {
     width: 800px;
     margin: auto;
-    margin-top: 10px;
+    margin-top: 20px;
     padding: 10px;
     background-color: rgb(179, 173, 164);
 }
@@ -71,6 +71,8 @@ p {
 
 
 
+
+
 .weather-container {
     display: flex;
     justify-content: center; /* Horizontally center the content */
@@ -98,8 +100,11 @@ p {
 
 
 .hourly-tab {
-    display: flex;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(8, 1fr); /* 8 tabs per line */
+    gap: 5px; /* Adjust as needed */
+    justify-items: center;
+    align-items: center;
     margin-bottom: 20px;
 }
 
@@ -107,7 +112,6 @@ p {
     background-color: #f0f0f0;
     border: 1px solid #ccc;
     padding: 10px 20px;
-    margin: 0 5px;
     cursor: pointer;
 }
 
@@ -115,10 +119,13 @@ p {
     background-color: #ccc;
 }
 
+
 .hourly-details {
     display: none;
     margin-top: 20px;
-    border: 1px solid #ddd;
+    width: 780px;
+    height: 100px;
+    background-color: rgb(220, 218, 244);
 }
 
 .hourly-details.active {
