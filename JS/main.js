@@ -191,7 +191,8 @@ function showHourlyDetails(hour, hourlyData) {
 
     // Show details for the selected hour
     const hourTime = hour.toLocaleTimeString();
-    const temperature = hourlyData.temp;
+    const temperatureKelvin = hourlyData.temp;
+    const temperatureCelsius = kelvinToCelsius(temperatureKelvin).toFixed(2);
     const weatherDescription = hourlyData.weather[0].description;
 
     const div = document.createElement('div');
@@ -200,7 +201,7 @@ function showHourlyDetails(hour, hourlyData) {
         <div>
             <p>Date: ${selectedDate}</p>
             <p>Time: ${hourTime}</p>
-            <p>Temperature: ${temperature} K</p>
+            <p>Temperature: ${temperatureKelvin} K (${temperatureCelsius} °C)</p>
             <p>Weather: ${weatherDescription}</p>
         </div>
         <img src="http://openweathermap.org/img/w/${hourlyData.weather[0].icon}.png" alt="Weather Icon" class="weather-icon">
@@ -215,7 +216,7 @@ function showDailyDetails(dailyData) {
 
     // Show details for the selected day
     const dayDate = new Date(dailyData.dt * 1000).toDateString();
-    const temperature = dailyData.temp.day;
+    const temperatureKelvin = dailyData.temp.day;
     const temperatureCelsius = kelvinToCelsius(temperatureKelvin).toFixed(2);
     const weatherDescription = dailyData.weather[0].description;
 
@@ -231,5 +232,6 @@ function showDailyDetails(dailyData) {
     `;
     dailyDetailsContainer.appendChild(div);
 }
+
 
 
