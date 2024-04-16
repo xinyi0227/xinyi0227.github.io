@@ -76,12 +76,23 @@ async function getWeather(lat, lon) {
 
         // Sunrise and Sunset Section
         const sunriseSunsetSection = document.getElementById('sunrise-sunset-info');
-        const sunriseTime = new Date(data.current.sunrise * 1000).toLocaleTimeString();
-        const sunsetTime = new Date(data.current.sunset * 1000).toLocaleTimeString();
-        sunriseSunsetSection.innerHTML = `
-            <p>Sunrise: ${sunriseTime}</p>
-            <p>Sunset: ${sunsetTime}</p>
-        `;
+
+        if (data.current.sunrise && data.current.sunset) {
+            // Sunrise and sunset times are provided
+            const sunriseTime = new Date(data.current.sunrise * 1000).toLocaleTimeString();
+            const sunsetTime = new Date(data.current.sunset * 1000).toLocaleTimeString();
+            
+            sunriseSunsetSection.innerHTML = `
+                <p>Sunrise: ${sunriseTime}</p>
+                <p>Sunset: ${sunsetTime}</p>
+            `;
+        } else {
+            // Sunrise and sunset times are not applicable
+            sunriseSunsetSection.innerHTML = `
+                <p>Sunrise and sunset times are not applicable for this location.</p>
+            `;
+        }
+
 
         // Additional Weather Details Section
         const additionalDetailsSection = document.getElementById('additional-details-info');
@@ -89,6 +100,7 @@ async function getWeather(lat, lon) {
             <p>Pressure: ${data.current.pressure} hPa</p>
             <p>Visibility: ${data.current.visibility} meters</p>
             <p>Wind Speed: ${data.current.wind_speed} m/s</p>
+            <p>UV Index: ${data.current.uvi} </p>
         `;
 
 
@@ -140,6 +152,7 @@ async function getWeather(lat, lon) {
         // Function to show hourly details for the selected hour
         function showHourlyDetails(hour, hourlyData) {
             const selectedHour = hour.getHours();
+            const selectedDate = hour.toDateString();
         
             const hourlyDetailsContainer = document.getElementById('hourly-details-container');
             hourlyDetailsContainer.innerHTML = ''; // Clear previous content
@@ -152,11 +165,16 @@ async function getWeather(lat, lon) {
             const div = document.createElement('div');
             div.classList.add('hourly-forecast-item');
             div.innerHTML = `
-                <p>Time: ${hourTime}</p>
-                <p>Temperature: ${temperature} K</p>
-                <p>Weather: ${weatherDescription}</p>
+                <div>
+                    <p>Date: ${selectedDate}</p>
+                    <p>Time: ${hourTime}</p>
+                    <p>Temperature: ${temperature} K</p>
+                    <p>Weather: ${weatherDescription}</p>
+                </div>
+                <img src="http://openweathermap.org/img/w/${hourlyData.weather[0].icon}.png" alt="Weather Icon" class="weather-icon">
             `;
             hourlyDetailsContainer.appendChild(div);
+
         }
         
 
