@@ -179,9 +179,8 @@ function showHourlyDetails(hour, hourlyData) {
     const selectedDate = hour.toDateString();
 
     const hourlyDetailsContainer = document.getElementById('hourly-details-container');
-    hourlyDetailsContainer.innerHTML = ''; // Clear previous content
+    hourlyDetailsContainer.innerHTML = ''; 
 
-    // Show details for the selected hour
     const hourTime = hour.toLocaleTimeString();
     const temperatureKelvin = hourlyData.temp;
     const temperatureCelsius = kelvinToCelsius(temperatureKelvin).toFixed(2);
@@ -204,9 +203,8 @@ function showHourlyDetails(hour, hourlyData) {
 // Function to show daily details for the selected day
 function showDailyDetails(dailyData) {
     const dailyDetailsContainer = document.getElementById('daily-details-container');
-    dailyDetailsContainer.innerHTML = ''; // Clear previous content
+    dailyDetailsContainer.innerHTML = ''; 
 
-    // Show details for the selected day
     const dayDate = new Date(dailyData.dt * 1000).toDateString();
     const temperatureKelvin = dailyData.temp.day;
     const temperatureCelsius = kelvinToCelsius(temperatureKelvin).toFixed(2);
