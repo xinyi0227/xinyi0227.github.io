@@ -30,10 +30,6 @@ p {
     background-color: rgb(179, 173, 164);
 }
 
-.tab-content {
-    display: none;
-}
-
 /* Style for tab buttons */
 .tab-button {
     background-color: #f4f4f4;
@@ -50,7 +46,7 @@ p {
 }
 
 .tab-button.active {
-    background-color: #ccc;
+    background-color: #792525;
 }
 
 /* Style for tab content */
@@ -122,6 +118,7 @@ p {
 .hourly-details {
     display: none;
     margin-top: 20px;
+    border: 1px solid #ddd;
 }
 
 .hourly-details.active {
@@ -132,6 +129,7 @@ p {
     border: 1px solid #ccc;
     padding: 10px;
     text-align: center;
+    display: block;
 }
 
 .hourly-forecast-item p {
