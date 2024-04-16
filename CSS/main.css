@@ -101,22 +101,25 @@ p {
 
 .hourly-tab {
     display: grid;
-    grid-template-columns: repeat(8, 1fr); /* 8 tabs per line */
-    gap: 5px; /* Adjust as needed */
+    grid-template-columns: repeat(8, 1fr); 
+    gap: 3px; 
     justify-items: center;
     align-items: center;
     margin-bottom: 20px;
+    margin-top: 20px;
 }
 
 .hourly-tab button {
     background-color: #f0f0f0;
     border: 1px solid #ccc;
     padding: 10px 20px;
+    border-radius: 5px;
     cursor: pointer;
 }
 
 .hourly-tab button.active {
-    background-color: #ccc;
+    background-color: #16727e;
+    color: white;
 }
 
 
@@ -150,3 +153,53 @@ p {
     height: 80px;  
 }
 
+
+
+
+
+
+/* Daily Tab Styles */
+#daily-tab {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+#daily-tab button {
+    padding: 10px 20px;
+    background-color: #f0f0f0;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#daily-tab button:hover {
+    background-color: #e0e0e0;
+}
+
+#daily-tab button.active {
+    background-color: #00bcd4;
+    color: white;
+}
+
+.daily-details {
+    margin-top: 20px;
+}
+
+.daily-forecast-item {
+    display: flex; 
+    align-items: center;
+    margin-left: 250px;
+}
+
+.daily-forecast-item p {
+    margin: 5px 10px;
+}
+
+.daily-forecast-item img {
+    margin-left: auto; 
+    margin-right: 250px;
+    width: 80px;
+    height: 80px;  
+}
