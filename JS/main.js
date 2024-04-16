@@ -1,3 +1,8 @@
+// Function to convert Kelvin to Celsius
+function kelvinToCelsius(kelvin) {
+    return kelvin - 273.15;
+  }
+
 const tabButtons = document.querySelectorAll('.tab-button');
 const tabContents = document.querySelectorAll('.tab-content');
 
@@ -211,6 +216,7 @@ function showDailyDetails(dailyData) {
     // Show details for the selected day
     const dayDate = new Date(dailyData.dt * 1000).toDateString();
     const temperature = dailyData.temp.day;
+    const temperatureCelsius = kelvinToCelsius(temperatureKelvin).toFixed(2);
     const weatherDescription = dailyData.weather[0].description;
 
     const div = document.createElement('div');
@@ -218,10 +224,12 @@ function showDailyDetails(dailyData) {
     div.innerHTML = `
         <div>
             <p>Date: ${dayDate}</p>
-            <p>Temperature: ${temperature} K</p>
+            <p>Temperature: ${temperatureKelvin} K (${temperatureCelsius} °C)</p>
             <p>Weather: ${weatherDescription}</p>
         </div>
         <img src="http://openweathermap.org/img/w/${dailyData.weather[0].icon}.png" alt="Weather Icon" class="weather-icon">
     `;
     dailyDetailsContainer.appendChild(div);
 }
+
+

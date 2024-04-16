@@ -75,18 +75,18 @@ p {
 
 .weather-container {
     display: flex;
-    justify-content: center; /* Horizontally center the content */
+    justify-content: center;
 }
 
 .weather-info {
     display: flex;
     align-items: center;
     border: none;
-    padding: 20px; /* Optional: Add padding for spacing */
+    padding: 20px; 
 }
 
 .weather-info p {
-    margin-bottom: 10px; /* Adjust the margin as needed */
+    margin-bottom: 10px; 
     text-align: left;
 }
 
