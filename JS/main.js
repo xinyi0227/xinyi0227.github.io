@@ -3,6 +3,12 @@ function kelvinToCelsius(kelvin) {
     return kelvin - 273.15;
   }
 
+
+
+
+
+  
+
 const tabButtons = document.querySelectorAll('.tab-button');
 const tabContents = document.querySelectorAll('.tab-content');
 
